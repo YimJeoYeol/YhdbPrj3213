@@ -31,12 +31,16 @@ public class WebSecurityConfigure {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and()
                 .authorizeRequests()
-                .antMatchers("/view/**","/test/**","api/**").hasRole("N") //해당 권한을 가진 경우
+//                .antMatchers("/view/**","/test/**","api/**").hasRole("N") //해당 권한을 가진 경우
 //                .antMatchers().hasRole("Y")
-                .antMatchers("/","/err/**","/auth/**","/justwait","/img/**").permitAll() //권한 유무따지지 않고 모두 접근
-//                .antMatchers("/**").permitAll()
+//                .antMatchers("/","/err/**","/auth/**","/justwait","/img/**").permitAll() //권한 유무따지지 않고 모두 접근
+                .antMatchers("/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
+//                .formLogin().loginPage("auth/loginForm")
+//                .loginProcessingUrl("auth/loginForm")
+//                .defaultSuccessUrl("/")
+//                .and()
                 .exceptionHandling().accessDeniedHandler(webAccessDeniedHandler)
                 .and()
                 .logout()
@@ -50,10 +54,7 @@ public class WebSecurityConfigure {
     }
 
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-    }
+
 
 
 //    private final  JwtProvider jwtProvider;
