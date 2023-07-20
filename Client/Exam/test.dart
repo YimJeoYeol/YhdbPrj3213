@@ -8,6 +8,8 @@ void main() {
   runApp(MyApp());
 }
 
+String ip = '192.168.1.4';
+
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -75,7 +77,7 @@ class LoginPage extends StatelessWidget {
   }
 
   void login(BuildContext context, String id, String password) async {
-    String url = 'http://182.229.34.184:5502/auth/login';
+    String url = 'http://'+ip+':5502/auth/login';
     Map<String, dynamic> data = {'userName': id, 'password': password};
 
     try {
@@ -88,9 +90,7 @@ class LoginPage extends StatelessWidget {
       );
 
       if (response.statusCode == 200) {
-        var token = jsonDecode(response.body)['token']; // 서버에서 받은 토큰 추출
-
-        Navigator.pushReplacementNamed(context, '/main', arguments: token); // 토큰을 메인 페이지로 전달
+        Navigator.pushReplacementNamed(context, '/main', arguments: id);
       } else {
         showDialog(
           context: context,
@@ -190,7 +190,7 @@ class SignupPage extends StatelessWidget {
   }
 
   void signup(BuildContext context, String id, String name, String password, String phone) async {
-    String url = 'http://182.229.34.184:5502/auth/signup';
+    String url = 'http://'+ip+':5502/auth/signup';
     Map<String, dynamic> data = {
       'userName': id,
       'name': name,
@@ -333,6 +333,10 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
+  void _logout() {
+    Navigator.pushReplacementNamed(context, '/login');
+  }
+
   void _getUserName() {
     final args = ModalRoute.of(context)!.settings.arguments;
     if (args != null) {
@@ -342,9 +346,9 @@ class _MainPageState extends State<MainPage> {
     }
   }
 
-  Future<void> _uploadFile(String token) async {
+  Future<void> _uploadFile() async {
     if (_filePath != null && _phoneNumber.isNotEmpty) {
-      String url = 'http://182.229.34.184:5502/api/VoiClaReq';
+      String url = 'http://'+ip+':5502/api/VoiClaReq';
 
       setState(() {
         _isLoading = true;
@@ -354,7 +358,7 @@ class _MainPageState extends State<MainPage> {
       try {
         var request = http.MultipartRequest('POST', Uri.parse(url));
         request.fields['declaration'] = _phoneNumber;
-        request.fields['userName'] = token; // 토큰 값 사용
+        request.fields['userName'] = userName;
         request.files.add(
           await http.MultipartFile.fromPath('file', _filePath),
         );
@@ -365,20 +369,6 @@ class _MainPageState extends State<MainPage> {
           setState(() {
             serverResponse = '파일 전송 성공';
           });
-
-          var responseString = await response.stream.bytesToString();
-
-          if (responseString == '1') {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => WarningScreen()),
-            );
-          } else if (responseString == '0') {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => SafetyScreen()),
-            );
-          }
 
           // 파일 전송 후 음성 인식 결과 확인
           _checkServerResponse();
@@ -400,7 +390,7 @@ class _MainPageState extends State<MainPage> {
   void _checkServerResponse() async {
     while (true) {
       try {
-        String url = 'http://182.229.34.184:5502/api/VoiClaReq';
+        String url = 'http://'+ip+':5502/api/VoiClaReq';
 
         var response = await http.get(Uri.parse(url));
 
@@ -447,6 +437,12 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('파일 업로드'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.logout),
+            onPressed: _logout,
+          ),
+        ],
       ),
       body: _isLoading
           ? LoadingScreen()
@@ -515,13 +511,7 @@ class _MainPageState extends State<MainPage> {
                 '파일 전송',
                 style: TextStyle(fontSize: 20),
               ),
-              onPressed: () {
-                final args = ModalRoute.of(context)!.settings.arguments;
-                if (args != null) {
-                  String token = args as String;
-                  _uploadFile(token); // 토큰 값을 전달하여 파일 업로드
-                }
-              },
+              onPressed: _uploadFile,
             ),
             SizedBox(height: 20),
             if (_filePath != null)

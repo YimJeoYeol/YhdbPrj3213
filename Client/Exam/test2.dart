@@ -76,6 +76,7 @@ class LoginPage extends StatelessWidget {
 
   void login(BuildContext context, String id, String password) async {
     String url = 'http://182.229.34.184:5502/auth/login';
+    // String url = 'http://127.0.0.1:5502/auth/login';
     Map<String, dynamic> data = {'userName': id, 'password': password};
 
     try {
@@ -88,8 +89,7 @@ class LoginPage extends StatelessWidget {
       );
 
       if (response.statusCode == 200) {
-        var token = jsonDecode(response.body)['token'];
-        Navigator.pushReplacementNamed(context, '/main', arguments: token);
+        Navigator.pushReplacementNamed(context, '/main', arguments: id);
       } else {
         showDialog(
           context: context,
@@ -269,7 +269,7 @@ class _MainPageState extends State<MainPage> {
   var _filePath;
   bool _isLoading = false;
   String _phoneNumber = '';
-  String token = '';
+  String userName = '';
   String serverResponse = '';
   String voiceResult = '';
 
@@ -332,11 +332,15 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
+  void _logout() {
+    Navigator.pushReplacementNamed(context, '/login');
+  }
+
   void _getUserName() {
     final args = ModalRoute.of(context)!.settings.arguments;
     if (args != null) {
       setState(() {
-        token = args as String;
+        userName = args as String;
       });
     }
   }
@@ -352,8 +356,8 @@ class _MainPageState extends State<MainPage> {
 
       try {
         var request = http.MultipartRequest('POST', Uri.parse(url));
-        request.headers['Authorization'] = 'Bearer $token';
         request.fields['declaration'] = _phoneNumber;
+        request.fields['userName'] = userName;
         request.files.add(
           await http.MultipartFile.fromPath('file', _filePath),
         );
@@ -379,6 +383,7 @@ class _MainPageState extends State<MainPage> {
             );
           }
 
+          // 파일 전송 후 음성 인식 결과 확인
           _checkServerResponse();
         } else {
           setState(() {
@@ -397,36 +402,63 @@ class _MainPageState extends State<MainPage> {
 
   void _checkServerResponse() async {
     while (true) {
-      try {
-        String url = 'http://182.229.34.184:5502/api/VoiClaReq';
+      void _uploadFile() async {
+        if (_filePath != null && _phoneNumber.isNotEmpty) {
+          String url = 'http://182.229.34.184:5502/api/VoiClaReq';
 
-        var response = await http.get(Uri.parse(url));
-
-        if (response.statusCode == 200) {
-          var data = jsonDecode(response.body);
-          var result = data.toString();
           setState(() {
-            voiceResult = result;
+            _isLoading = true;
+            serverResponse = '';
           });
 
-          if (result == '0') {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => SafetyScreen()),
+          try {
+            var request = http.MultipartRequest('POST', Uri.parse(url));
+            request.fields['declaration'] = _phoneNumber;
+            request.fields['userName'] = userName;
+            request.files.add(
+              await http.MultipartFile.fromPath('file', _filePath),
             );
-            break;
-          } else if (result == '1') {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => WarningScreen()),
-            );
-            break;
-          } else {
-            break;
+
+            var response = await request.send();
+
+            if (response.statusCode == 200) {
+              setState(() {
+                serverResponse = '파일 전송 성공';
+              });
+
+              var responseString = await response.stream.bytesToString();
+
+              if (responseString == '1') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => WarningScreen()),
+                );
+              } else if (responseString == '0') {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SafetyScreen()),
+                );
+              } else {
+                setState(() {
+                  serverResponse = '파일 전송 실패 - 알 수 없는 결과: $responseString';
+                });
+              }
+
+              // 파일 전송 후 음성 인식 결과 확인
+              _checkServerResponse();
+            } else {
+              setState(() {
+                serverResponse = '파일 전송 실패';
+              });
+            }
+          } catch (e) {
+            print(e);
+          } finally {
+            setState(() {
+              _isLoading = false;
+            });
           }
         }
-      } catch (e) {
-        print(e);
       }
 
       await Future.delayed(Duration(seconds: 3));
@@ -444,6 +476,12 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('파일 업로드'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.logout),
+            onPressed: _logout,
+          ),
+        ],
       ),
       body: _isLoading
           ? LoadingScreen()
@@ -593,7 +631,6 @@ class WarningScreen extends StatelessWidget {
     );
   }
 }
-
 class SafetyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -621,4 +658,3 @@ class SafetyScreen extends StatelessWidget {
     );
   }
 }
-//

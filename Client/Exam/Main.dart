@@ -7,6 +7,7 @@ import 'package:file_picker/file_picker.dart';
 void main() {
   runApp(MyApp());
 }
+String ip = '192.168.1.4';
 
 class MyApp extends StatelessWidget {
   @override
@@ -75,7 +76,8 @@ class LoginPage extends StatelessWidget {
   }
 
   void login(BuildContext context, String id, String password) async {
-    String url = 'http://182.229.34.184:5502/auth/login';
+    String url = 'http://'+ip+':5502/auth/login';
+    // String url = 'http://127.0.0.1:5502/auth/login';
     Map<String, dynamic> data = {'userName': id, 'password': password};
 
     try {
@@ -188,7 +190,7 @@ class SignupPage extends StatelessWidget {
   }
 
   void signup(BuildContext context, String id, String name, String password, String phone) async {
-    String url = 'http://182.229.34.184:5502/auth/signup';
+    String url = 'http://'+ip+':5502/auth/signup';
     Map<String, dynamic> data = {
       'userName': id,
       'name': name,
@@ -331,6 +333,10 @@ class _MainPageState extends State<MainPage> {
     );
   }
 
+  void _logout() {
+    Navigator.pushReplacementNamed(context, '/login');
+  }
+
   void _getUserName() {
     final args = ModalRoute.of(context)!.settings.arguments;
     if (args != null) {
@@ -342,7 +348,7 @@ class _MainPageState extends State<MainPage> {
 
   Future<void> _uploadFile() async {
     if (_filePath != null && _phoneNumber.isNotEmpty) {
-      String url = 'http://182.229.34.184:5502/api/VoiClaReq';
+      String url = 'http://'+ip+':5502/api/VoiClaReq';
 
       setState(() {
         _isLoading = true;
@@ -398,7 +404,7 @@ class _MainPageState extends State<MainPage> {
   void _checkServerResponse() async {
     while (true) {
       try {
-        String url = 'http://182.229.34.184:5502/api/VoiClaReq';
+        String url = 'http://'+ip+':5502/api/VoiClaReq';
 
         var response = await http.get(Uri.parse(url));
 
@@ -422,7 +428,7 @@ class _MainPageState extends State<MainPage> {
             );
             break;
           } else {
-            // 원하는 조건을 추가로 처리할 수 있습니다.
+
             break;
           }
         }
@@ -445,6 +451,12 @@ class _MainPageState extends State<MainPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('파일 업로드'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.logout),
+            onPressed: _logout,
+          ),
+        ],
       ),
       body: _isLoading
           ? LoadingScreen()
@@ -594,7 +606,6 @@ class WarningScreen extends StatelessWidget {
     );
   }
 }
-
 class SafetyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
