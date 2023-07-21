@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+#jyjpm: pip install tensorflow, keras, mariadb, librosa, flask, flask_restx, SpeechRecognition, pydub
 
 from flask import Flask, request, jsonify
 from flask_restx import Api, Resource
