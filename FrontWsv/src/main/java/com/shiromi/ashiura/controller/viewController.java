@@ -1,8 +1,10 @@
 package com.shiromi.ashiura.controller;
 
 import com.shiromi.ashiura.config.jwt.JwtProvider;
+import com.shiromi.ashiura.domain.entity.UserEntity;
 import com.shiromi.ashiura.domain.entity.VoiceDataEntity;
 import com.shiromi.ashiura.service.LoadingService;
+import com.shiromi.ashiura.service.UserService;
 import com.shiromi.ashiura.service.VoiceDataService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -25,6 +27,7 @@ public class viewController {
     private final LoadingService loadingService;
     private final JwtProvider jwtProvider;
     private final VoiceDataService voiceDataService;
+    private final UserService userService;
 
 
     @Value("${url.api}")
@@ -53,7 +56,9 @@ public class viewController {
             Model model) {
         log.info("View: {}", urlApi + "/view/info");
         if (user != null) {
-            List<VoiceDataEntity> voiceData = voiceDataService.findByUserNameAll(user.getUsername());
+
+            UserEntity userObj = userService.findByUserName(user.getUsername());
+            List<VoiceDataEntity> voiceData = voiceDataService.findByIdxAll(userObj.getIdx());
 
             model.addAttribute("userName", user.getUsername());
             model.addAttribute("voiceData", voiceData);
@@ -89,7 +94,7 @@ public class viewController {
         }
         return "test/add_voice_data";
     }
-    // 웹에서 신고하기 뷰 반환
+
     @GetMapping("/view/VoiClaReq")
     public String VoiceClientRequest(
             @AuthenticationPrincipal User user,
@@ -102,6 +107,20 @@ public class viewController {
         }
         return "api/VoiClaReq";
     }
+
+    @GetMapping("/view/test")
+    public String modelTest(
+            @AuthenticationPrincipal User user,
+            Model model){
+        if (user != null) {
+            model.addAttribute("userName", user.getUsername());
+        } else {
+            model.addAttribute("userName", "unknown");
+        }
+        return "view/test";
+    }
+
+
     // 접근 권한이 없는 사용자 튕구는 곳
     @GetMapping("/err/denied-page")
     public String accessDenied(
