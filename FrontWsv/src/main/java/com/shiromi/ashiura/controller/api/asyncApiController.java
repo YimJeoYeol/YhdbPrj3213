@@ -46,7 +46,7 @@ public class asyncApiController {
     }
 
     //py에서 던져진 Json데이터를 받아서 DTO객체를 set하는 메소드를 호출하는 맵핑
-    @PostMapping("/progress/{userName}/{declaration}")
+    @PostMapping("/progress/{idx}/{declaration}")
     public void progress(
             @RequestBody PredictionResultResponseDTO resultRes,
             @PathVariable("idx") Long idx,
