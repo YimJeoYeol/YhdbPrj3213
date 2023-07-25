@@ -47,7 +47,7 @@ public class UserLoginRequestDto {
 	public User toEntity() {
 		return User.builder()
 				   .userid(userid)
-				   .password(password2)
+				   .password(password)
 				   .phoneNumber(phoneNumber)
 				   .role(role)
 				   .build();

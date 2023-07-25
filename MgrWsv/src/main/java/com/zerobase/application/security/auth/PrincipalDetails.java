@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
+import static com.zerobase.domain.RoleType.ADMIN;
+
 @Getter
 public class PrincipalDetails implements UserDetails, OAuth2User {
 	
@@ -44,7 +46,7 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Collection<GrantedAuthority> collection = new ArrayList<>();
-		collection.add(() -> { return "ROLE_" + user.getRole();} );
+		collection.add(() -> { return "ROLE_" + user.getRole(ADMIN);} );
 		
 		return collection;
 	}
