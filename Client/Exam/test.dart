@@ -371,7 +371,7 @@ class _MainPageState extends State<MainPage> {
           });
 
           // 파일 전송 후 음성 인식 결과 확인
-          _checkServerResponse();
+          await _checkServerResponse();
         } else {
           setState(() {
             serverResponse = '파일 전송 실패';
@@ -387,7 +387,7 @@ class _MainPageState extends State<MainPage> {
     }
   }
 
-  void _checkServerResponse() async {
+  Future<void> _checkServerResponse() async {
     while (true) {
       try {
         String url = 'http://'+ip+':5502/api/VoiClaReq';
@@ -530,9 +530,18 @@ class _MainPageState extends State<MainPage> {
               style: TextStyle(fontSize: 20),
             ),
             SizedBox(height: 20),
-            Text(
-              '음성 인식 결과: $voiceResult',
-              style: TextStyle(fontSize: 20),
+            FutureBuilder(
+              future: _checkServerResponse(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return LoadingScreen();
+                } else {
+                  return Text(
+                    '음성 인식 결과: $voiceResult',
+                    style: TextStyle(fontSize: 20),
+                  );
+                }
+              },
             ),
           ],
         ),

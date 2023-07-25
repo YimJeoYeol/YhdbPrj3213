@@ -85,7 +85,7 @@ logging:
       hiberante:
         SQL: debug
 
-    boardexample:
-      myboard: info
+    com.zero-base:
+      zb3: info
       
       

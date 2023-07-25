@@ -3,6 +3,8 @@ package com.zerobase.application.service;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,8 @@ import com.zerobase.infrastructure.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
+import static com.zerobase.domain.RoleType.ADMIN;
 
 @Service
 @RequiredArgsConstructor
@@ -28,7 +32,7 @@ public class UserService {
     @Transactional
     public void join(UserSaveRequestDto userSaveRequestDto) {
         if(userSaveRequestDto.getUsername().equals("damin")) {
-            userSaveRequestDto.setRole(RoleType.ADMIN);
+            userSaveRequestDto.setRole(ADMIN);
         }
         String encodePassword = encoder.encode(userSaveRequestDto.getPassword());
         userSaveRequestDto.setPassword(encodePassword);
@@ -44,11 +48,15 @@ public class UserService {
         if (findUser != null) {
             findUser.updatePhoneNumber(user.getPhoneNumber());
             findUser.updatePassword(user.getPassword());
-            findUser.updateRole(user.getRole());
+            findUser.updateRole(user.getRole(ADMIN));
 
             userRepository.save(findUser);
 
             //서비스 단이라서 다시 저장해야할 것 같은데 github에는 안되어 있는데? 밑에 findUser 메소드도 쓰지 않았음.
         }
+    }
+    @Transactional
+    public Page<User> list(Pageable pageable){
+        return userRepository.findAllWithUser(pageable);
     }
 }
