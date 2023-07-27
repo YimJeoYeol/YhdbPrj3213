@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 
 @NoArgsConstructor
 @Data
-public class UserSignupRequestDTO {
-
+public class UserUpdateRequestDTO {
+    private Long idx;
     private String userName;
     private String name;
     private String password;
@@ -16,8 +16,9 @@ public class UserSignupRequestDTO {
     private String rating;
 
     @Builder
-    public UserSignupRequestDTO(String userName, String name, String password,
-                                String phoneNumber, String rating){
+    public UserUpdateRequestDTO(Long idx, String userName, String name, String password, String phoneNumber,
+                                String rating) {
+        this.idx = idx;
         this.userName = userName;
         this.name = name;
         this.password = password;
@@ -26,6 +27,7 @@ public class UserSignupRequestDTO {
     }
     public UserEntity toEntity() {
         return UserEntity.builder()
+                .idx(idx)
                 .userName(userName)
                 .name(name)
                 .password(password)
