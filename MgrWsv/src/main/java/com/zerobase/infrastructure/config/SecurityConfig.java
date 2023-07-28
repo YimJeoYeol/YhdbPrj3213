@@ -1,7 +1,6 @@
 package com.zerobase.infrastructure.config;
 
 import com.zerobase.application.security.oauth.PrincipalOauth2UserService;
-import com.zerobase.domain.RoleType;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -30,20 +29,18 @@ public class SecurityConfig {
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		return http.csrf(csrf -> csrf.disable())
 				   .httpBasic(httpBasic -> httpBasic.disable())
-
+				   
 				   //인증 권한 설정. 현재 아래 경로 외에 권한이 필요하다고만 되어 있음.
-
 				   .authorizeHttpRequests(authroize -> authroize
 						   .antMatchers("/", "/auth/**", "/js/**", "/css/**", "/image/**").permitAll()
 						   .anyRequest()
 						   .authenticated())
-
-
+				   
 				   //기본 로그인 설정
 				   .formLogin(fromLogin -> fromLogin.loginPage("/auth/loginForm")
 						   .loginProcessingUrl("/auth/login")
 						   .defaultSuccessUrl("/"))
-
+				   
 				   //Oauth2 로그인 설정
 			       /*.oauth2Login(oauth2Login -> oauth2Login.loginPage("/auth/loginForm")
 			    		   .userInfoEndpoint()
