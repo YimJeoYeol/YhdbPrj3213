@@ -3,11 +3,14 @@ import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter/services.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(MyApp());
 }
-String ip = '192.168.1.4';
+
+// String ip = '192.168.1.19';
+String ip = '182.229.34.184';
 
 class MyApp extends StatelessWidget {
   @override
@@ -77,7 +80,6 @@ class LoginPage extends StatelessWidget {
 
   void login(BuildContext context, String id, String password) async {
     String url = 'http://'+ip+':5502/auth/login';
-    // String url = 'http://127.0.0.1:5502/auth/login';
     Map<String, dynamic> data = {'userName': id, 'password': password};
 
     try {
@@ -167,6 +169,8 @@ class SignupPage extends StatelessWidget {
             ),
             TextField(
               controller: _phoneController,
+              keyboardType: TextInputType.phone, // Numeric keyboard
+              inputFormatters: [FilteringTextInputFormatter.digitsOnly], // Only allow digits
               decoration: InputDecoration(
                 labelText: '전화번호',
               ),
@@ -269,6 +273,7 @@ class MainPage extends StatefulWidget {
 class _MainPageState extends State<MainPage> {
   var _filePath;
   bool _isLoading = false;
+  bool _showLoading = false;
   String _phoneNumber = '';
   String userName = '';
   String serverResponse = '';
@@ -313,6 +318,8 @@ class _MainPageState extends State<MainPage> {
           title: Text('전화번호 입력'),
           content: TextField(
             controller: _phoneController,
+            keyboardType: TextInputType.phone, // Numeric keyboard
+            inputFormatters: [FilteringTextInputFormatter.digitsOnly], // Only allow digits
             decoration: InputDecoration(
               labelText: '전화번호',
             ),
@@ -384,7 +391,6 @@ class _MainPageState extends State<MainPage> {
             );
           }
 
-          // 파일 전송 후 음성 인식 결과 확인
           _checkServerResponse();
         } else {
           setState(() {
@@ -402,6 +408,10 @@ class _MainPageState extends State<MainPage> {
   }
 
   void _checkServerResponse() async {
+    setState(() {
+      _showLoading = true;
+    });
+
     while (true) {
       try {
         String url = 'http://'+ip+':5502/api/VoiClaReq';
@@ -428,16 +438,17 @@ class _MainPageState extends State<MainPage> {
             );
             break;
           } else {
-
-            break;
+            await Future.delayed(Duration(seconds: 3));
           }
         }
       } catch (e) {
         print(e);
       }
-
-      await Future.delayed(Duration(seconds: 3));
     }
+
+    setState(() {
+      _showLoading = false;
+    });
   }
 
   @override
@@ -458,7 +469,7 @@ class _MainPageState extends State<MainPage> {
           ),
         ],
       ),
-      body: _isLoading
+      body: _showLoading
           ? LoadingScreen()
           : SingleChildScrollView(
         child: Column(
@@ -597,7 +608,7 @@ class WarningScreen extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Text(
-              '위험 페이지',
+              '해당 음성 파일은 위험합니다.',
               style: TextStyle(fontSize: 24),
             ),
           ],
@@ -606,6 +617,7 @@ class WarningScreen extends StatelessWidget {
     );
   }
 }
+
 class SafetyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -624,7 +636,7 @@ class SafetyScreen extends StatelessWidget {
             ),
             SizedBox(height: 20),
             Text(
-              '안전 페이지',
+              '해당 음성파일은 안전합니다.',
               style: TextStyle(fontSize: 24),
             ),
           ],

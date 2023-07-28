@@ -1,5 +1,6 @@
 file:
-  dir: C:/rest/
+#  dir: C:/rest/
+  dir: F:/rest/
 
 url:
 #  adm: http://127.0.0.1:9988
