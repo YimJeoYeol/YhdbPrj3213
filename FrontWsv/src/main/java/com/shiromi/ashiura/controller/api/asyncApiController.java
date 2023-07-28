@@ -22,28 +22,10 @@ import java.io.IOException;
 @RequestMapping("/api")
 public class asyncApiController {
 
-    private final WebClientFileService webClientFileService;
     private final LoadingService loadingService;
-    private final UserService userService;
-
+    //주소와 포트넘버
     @Value("${url.api}")
     private String urlApi;
-
-    //뷰에서 폼데이터를 받아서 py로 쏘는 메소드를 호출하는 맵핑
-    @PostMapping("/VoiClaReq")
-    public void VoiClaReq(
-            @RequestParam("file") MultipartFile file,
-            @RequestParam("userName") String userName,
-            @RequestParam("declaration") String declaration
-    ) throws IOException {
-        log.info("async: {}", Thread.currentThread().getName());
-        log.info("post: {}",urlApi+"/VoiClaReq");
-        log.info("data: {}/{}/{}",file.getOriginalFilename(),userName,declaration);
-        UserDomain user = userService.findByUserName(userName).toDomain();
-        webClientFileService.webCliTestMethod(file,user.getIdx(),declaration);
-//        return ResponseEntity.status(HttpStatus.OK)
-//                .body();
-    }
 
     //py에서 던져진 Json데이터를 받아서 DTO객체를 set하는 메소드를 호출하는 맵핑
     @PostMapping("/progress/{idx}/{declaration}")

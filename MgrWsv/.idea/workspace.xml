@@ -5,7 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f926a84b-b8cd-47ac-9976-b1ab7caa301e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zerobase/application/dto/VoicedataDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zerobase/application/dto/VoicedataDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zerobase/controller/VoicedataApiController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zerobase/controller/VoicedataApiController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zerobase/controller/VoicedataIndexController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zerobase/controller/VoicedataIndexController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zerobase/domain/Voicedata.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zerobase/domain/Voicedata.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zerobase/infrastructure/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zerobase/infrastructure/config/SecurityConfig.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,12 +28,7 @@
       <state>
         <projects_view>
           <tree_state>
-            <expand>
-              <path>
-                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
-                <item name="zb3" type="f1a62948:ProjectNode" />
-              </path>
-            </expand>
+            <expand />
             <select />
           </tree_state>
         </projects_view>
@@ -45,9 +46,17 @@
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/its_time_to_stop_no_more/YhdbPrj3213/MgrWsv"
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/User/IdeaProjects/YhdbPrj3213/MgrWsv/src/main/java/com/zerobase/application/dto"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\User\IdeaProjects\YhdbPrj3213\MgrWsv\src\main\java\com\zerobase\application\dto" />
+      <recent name="C:\Users\User\IdeaProjects\YhdbPrj3213\MgrWsv\src\main\java\com\zerobase\controller" />
+      <recent name="C:\Users\User\IdeaProjects\YhdbPrj3213\MgrWsv\src\main\java\com\zerobase\domain" />
+    </key>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

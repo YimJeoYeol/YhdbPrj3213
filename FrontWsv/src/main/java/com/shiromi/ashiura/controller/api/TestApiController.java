@@ -1,15 +1,21 @@
-package com.shiromi.ashiura.controller;
+package com.shiromi.ashiura.controller.api;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import com.shiromi.ashiura.domain.dto.UserDomain;
 import com.shiromi.ashiura.domain.dto.VoiceDataDomain;
 import com.shiromi.ashiura.service.UserService;
 import com.shiromi.ashiura.service.VoiceDataService;
-import com.shiromi.ashiura.service.webClient.WebClientFileService;
 import com.shiromi.ashiura.service.webClient.WebClientTestService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import lombok.val;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.ui.Model;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.BufferedReader;
@@ -20,10 +26,12 @@ import java.io.InputStreamReader;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping
-public class TestController {
+public class TestApiController {
 
     private final VoiceDataService voiceDataService;
     private final WebClientTestService webClientTestService;
+    private final UserService userService;
+    private final VoiceDataService voicedataService;
 
     @Value("${url.api}")
     private String urlApi;
@@ -36,7 +44,7 @@ public class TestController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(voiceData);
     }
-
+    //로컬내의 파이썬 파일을 실행시키는 코드
     @GetMapping("/test/runPython/{filePath}")
     public String runPythonFile(
             @PathVariable String filePath
@@ -64,14 +72,13 @@ public class TestController {
         }
         return filePath + ": python success";
     }
-    @GetMapping("/admin/modelupdate/{idx}/{declaration}")
-    public String modelUpdate(
-            @PathVariable Long idx,
-            @PathVariable String declaration
-    ){
-
+//    동작 확인용
+    @GetMapping("/admin/modelupdate/")
+    public String modelUpdate(){
+        webClientTestService.modelUpdateRequestGet();
         return null;
     }
+    //    동작 확인용
     @PostMapping("/admin/text/{idx}/{declaration}")
     public String modelReRoll(
             @PathVariable Long idx,
@@ -81,5 +88,9 @@ public class TestController {
         webClientTestService.reRollPredictionPost(idx,declaration,text);
         return null;
     }
-
+    @GetMapping("/test/user_info/{idx}")
+    public UserDomain getUserInfo(
+            @PathVariable Long idx) {
+        return userService.findByIdx(idx).toDomain();
+    }
 }

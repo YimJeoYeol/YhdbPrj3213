@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <th:block th:replace="/layout/header.html :: fragment-header"></th:block>
+    <style>
+        h2 {
+            text-align: center;
+        }
+
+    </style>
+</head>
+<div th:replace="/layout/nav.html :: fragment-nav"></div>
+<body>
+<div class="container" style="max-width: 1500px">
+    <div class="py-5 text-center">
+        <h2>사용자관리</h2>
+    </div>
+       <div align="right">
+        <!-- <button class="btn btn-update" onclick="btn-update()">수정하기</button>
+           <button class="btn btn-cansle" onclick="onreset()">취소</button>-->
+    <!--    </div>-->
+    <!--&lt;!&ndash;    <script src="/js/pythonScriptRunner.js"></script>&ndash;&gt;-->
+    <!--    <br>-->
+    <!--    <div align="right">-->
+    <!--      <button class="btn btn-warning" onclick="">재학습결과 보기</button>-->
+    <!--    </div>-->
+
+    <!--  검색창-->
+    <!--  <div>-->
+    <!--    <form th:object="${SearchForm}" method="POST" style="display: flex; justify-content: flex-end; padding: 10px 0;">-->
+    <!--       <input type="date" th:field="*{start}">-->
+    <!--        ~ <input type="date" th:field="*{end}">-->
+    <!--      <select th:field="*{searchType}">-->
+    <!--        <option value="username">작성자</option>-->
+    <!--        <option value="declaration">신고된 번호</option>-->
+    <!--      </select>-->
+    <!--      <input th:field="*{searchType}" type="text" placeholder="검색어를 입력하세요"/>-->
+    <!--      <input type="submit" value="검색"/>-->
+    <!--    </form>-->
+
+      </div>
+
+    <hr class="my-4">
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>No</th>
+                <!--<th>아이디</th>-->
+                <th>이름</th>
+                <th>등급</th>
+              <!--  <th></th>-->
+                <th>전화번호</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="user : ${users}">
+                <td th:text="${user.idx}">No.</td>
+                <!--<td><a th:href="${user.userid}"}>${user.getUserid()}</a></td>-->
+                <td th:text="${user.username}">이름</td>
+                <td th:text="${user.getRole()}">role</td>
+               <!-- <td>
+                    <select name="role">
+                        <option value="ADMIN">ADMIN</option>
+                        <option value="USER">USER</option>
+                    </select>
+                </td>-->
+                <td th:text="${user.phoneNumber}">전화번호</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div> <!-- /container -->
+<footer th:replace="/layout/footer.html :: fragment-footer"></footer>
+</body>
+</html>

@@ -13,12 +13,13 @@ import java.util.Optional;
 @Transactional
 public interface VoiceDataRepository extends JpaRepository<VoiceDataEntity,Long> {
 
-//    Optional<VoiceDataEntity> findByUserName(String userName);
+//    Optional<VoiceDataEntity> findById(Long id);
 //    List<VoiceDataEntity> findByUserOrderByCreatedDateDesc(Long user);
 
 //    @Query(value = "SELECT audio_file FROM voicedata v JOIN user u On v.idx = u.idx WHERE v.idx = :idx")
     @Query(value = "SELECT v FROM VoiceDataEntity v JOIN UserEntity u On v.user = u.idx WHERE u.idx = :idx")
     List<VoiceDataEntity> findByIdxAll(@Param("idx") Long idx);
+
 
 //    Optional<VoiceDataEntity> findByDeclaration(String declaration);
 }

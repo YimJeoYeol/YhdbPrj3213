@@ -45,7 +45,8 @@ public class UserResponseDto {
 	public User toDto() {
 		return User.builder()
 				   .idx(idx)
-				   .userid(userid).username(username)
+				   .userid(userid)
+				   .username(username)
 				   .password(password)
 				   .phoneNumber(phoneNumber)
 				   .build();
