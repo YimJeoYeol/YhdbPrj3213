@@ -1,6 +1,6 @@
 package com.zerobase.application.dto;
 
-import com.querydsl.core.annotations.QueryProjection;
+
 import com.zerobase.domain.User;
 import com.zerobase.domain.Voicedata;
 import lombok.*;
