@@ -46,7 +46,7 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		Collection<GrantedAuthority> collection = new ArrayList<>();
-		collection.add(() -> { return "ROLE_" + user.getRole(ADMIN);} );
+		collection.add(() -> { return "ROLE_" + user.getRole();} );
 		
 		return collection;
 	}
@@ -87,9 +87,9 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
 		return true;
 	}
 	
-	//어디에 쓰는지 모르겠는데 일단 사용하지 않아서 null임.
+
 	@Override
 	public String getName() {
-		return null;
+		return user.getUsername();
 	}
 }

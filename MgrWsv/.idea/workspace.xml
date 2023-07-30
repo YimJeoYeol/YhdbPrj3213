@@ -5,7 +5,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f926a84b-b8cd-47ac-9976-b1ab7caa301e" name="Changes" comment="김예진, 임재열 수정본">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/zerobase/application/dto/BoardDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/zerobase/application/dto/ReplyDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/zerobase/application/service/BoardService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/zerobase/application/service/ReplyService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/zerobase/controller/BoardApiController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/zerobase/controller/BoardController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/zerobase/controller/ReplyApiController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/zerobase/domain/BaseTimeEntity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/zerobase/domain/Board.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/zerobase/domain/Reply.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/zerobase/infrastructure/repository/BoardRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/zerobase/infrastructure/repository/ReplyRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/js/board.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/board/articles.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/board/detail.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/board/updateForm.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/board/writeForm.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/category/freeboard.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/category/knowledge.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/gradle.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zerobase/application/dto/request/UserLoginRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zerobase/application/dto/request/UserLoginRequestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zerobase/application/dto/request/UserSaveRequestDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zerobase/application/dto/request/UserSaveRequestDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zerobase/application/security/auth/PrincipalDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zerobase/application/security/auth/PrincipalDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zerobase/application/security/auth/PrincipalDetailsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zerobase/application/security/auth/PrincipalDetailsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zerobase/application/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zerobase/application/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zerobase/infrastructure/config/SecurityConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zerobase/infrastructure/config/SecurityConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/zerobase/infrastructure/repository/UserRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/zerobase/infrastructure/repository/UserRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/Index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/Index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/layout/nav.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/layout/nav.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/user/listForm.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/user/listForm.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/user/loginForm.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/user/loginForm.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,6 +63,16 @@
       </state>
     </system>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+        <option value="HTML File" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
@@ -36,22 +80,44 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "main",
-    "ignore.virus.scanning.warn.message": "true",
-    "last_opened_file_path": "C:/Users/User/IdeaProjects/YhdbPrj3213/MgrWsv",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/YhdbPrj3213/MgrWsv&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Git&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;1d81e14a585f4a8a8942a929489034fe&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mariadb&quot;
+    ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\User\IdeaProjects\YhdbPrj3213\MgrWsv\src\main\java\com\zerobase\application\dto" />
       <recent name="C:\Users\User\IdeaProjects\YhdbPrj3213\MgrWsv\src\main\java\com\zerobase\controller" />
       <recent name="C:\Users\User\IdeaProjects\YhdbPrj3213\MgrWsv\src\main\java\com\zerobase\domain" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\YhdbPrj3213\MgrWsv\src\main\resources\templates\category" />
+      <recent name="C:\YhdbPrj3213\MgrWsv\src\main\resources\templates\board" />
+      <recent name="C:\YhdbPrj3213\MgrWsv\src\main\resources\templates" />
+      <recent name="C:\YhdbPrj3213\MgrWsv\src\main\resources\templates\board\category" />
     </key>
   </component>
   <component name="RunManager">
@@ -73,6 +139,17 @@
       <option name="presentableId" value="Default" />
       <updated>1689665116482</updated>
       <workItem from="1690511444591" duration="18000" />
+      <workItem from="1690608480008" duration="411000" />
+      <workItem from="1690608994975" duration="463000" />
+      <workItem from="1690609855177" duration="612000" />
+      <workItem from="1690630058070" duration="389000" />
+      <workItem from="1690631829324" duration="10063000" />
+      <workItem from="1690642516052" duration="2285000" />
+      <workItem from="1690646061145" duration="2353000" />
+      <workItem from="1690665751585" duration="3041000" />
+      <workItem from="1690677166882" duration="97000" />
+      <workItem from="1690677991445" duration="228000" />
+      <workItem from="1690680406988" duration="7491000" />
     </task>
     <task id="LOCAL-00001" summary="김예진, 임재열 수정본">
       <option name="closed" value="true" />
@@ -84,6 +161,9 @@
     </task>
     <option name="localTasksCounter" value="2" />
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">

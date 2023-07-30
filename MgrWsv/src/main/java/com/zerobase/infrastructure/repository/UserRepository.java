@@ -18,10 +18,10 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
 
     /* Security */
-//    Optional<User> findByUsername(String userid);
+   // Optional<User> findByUsername(String userid);
 
     /* OAuth */
-//    Optional<User> findByEmail(String email);
+    //Optional<User> findByEmail(String email);
 
     /* user GET */
 //    User findByNickname(String nickname);

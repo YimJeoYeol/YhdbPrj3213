@@ -42,9 +42,9 @@ public class SecurityConfig {
 						   .defaultSuccessUrl("/"))
 				   
 				   //Oauth2 로그인 설정
-			       /*.oauth2Login(oauth2Login -> oauth2Login.loginPage("/auth/loginForm")
+			       .oauth2Login(oauth2Login -> oauth2Login.loginPage("/auth/loginForm")
 			    		   .userInfoEndpoint()
-			    		   .userService(principalOauth2UserService))*/
+			    		   .userService(principalOauth2UserService))
 			       .build();
 	}
 }

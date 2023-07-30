@@ -52,7 +52,7 @@ public class UserService {
 
             userRepository.save(findUser);
 
-            //서비스 단이라서 다시 저장해야할 것 같은데 github에는 안되어 있는데? 밑에 findUser 메소드도 쓰지 않았음.
+
         }
     }
     @Transactional

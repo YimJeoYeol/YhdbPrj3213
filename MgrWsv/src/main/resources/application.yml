@@ -4,9 +4,9 @@ server:
 spring:
   datasource:
     #mariadb는 자신이 사용하고자 하는 스키마를 입력해야지 들어가짐.
-    url: jdbc:mariadb://182.229.34.184:3306/301project
+    url: jdbc:mariadb://182.229.34.184:3306/301project #//localhost:3306/board_study
     username: root
-    password: hkit301301
+    password:  hkit301301 #1234
     driver-class-name: org.mariadb.jdbc.Driver
 
 
@@ -29,8 +29,8 @@ spring:
      client:
       registration:
        google:
-        client-id: 1013147133735-j01tfa0ai92ui0cdlbfl0shquj5b09qk.apps.googleusercontent.com
-        client-secret: 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
+        client-id: 790516476072-l81js9a06jj69g01db60lkv7ji7rlbro.apps.googleusercontent.com
+        client-secret: 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
         scope:
         - email
         - profile

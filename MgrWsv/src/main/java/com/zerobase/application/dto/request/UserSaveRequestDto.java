@@ -31,17 +31,21 @@ public class UserSaveRequestDto {
     //@Pattern(regexp = "^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,6}$", message = "이메일 형식에 맞지 않습니다.")
     private String phoneNumber;
     private RoleType role;
+	private String provider;
+	private String providerId;
 	
     //디폴트 생성자가 있어야지 바인딩 되는데 원래 코드에는 없음....
     public UserSaveRequestDto() {};
     
 	@Builder
-	public UserSaveRequestDto(String userid, String username, String password, String phoneNumber, RoleType roleType) {
+	public UserSaveRequestDto(String userid, String username, String password, String phoneNumber, RoleType roleType,String provider, String providerId) {
 		this.userid = userid;
 		this.username = username;
 		this.password = password;
 		this.phoneNumber = phoneNumber;
 		this.role = roleType;
+		this.provider = provider;
+		this.providerId = providerId;
 	}
 	
 	public User toEntity() {

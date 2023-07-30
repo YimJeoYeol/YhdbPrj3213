@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <th:block th:replace="/layout/header.html :: fragment-header"></th:block>
+    <style>
+        h2 {
+            text-align: center;
+        }
+
+    </style>
+</head>
+<div th:replace="/layout/nav.html :: fragment-nav"></div>
+<body>
+<div class="container">
+    <table class="table">
+        <tr>
+            <th>번호</th><td><span th:text="${board.id}"></span></td>
+        </tr>
+        <tr>
+            <th>작성자</th><td><span th:text="${board.getUser().getUsername()}"></span></td>
+        </tr>
+        <tr>
+            <th>신고된 번호</th><td><span><b><i th:text="${board.declaration}"></i></b></span></td>
+        </tr>
+        <tr>
+            <th>분석 결과</th><td><span><b><i th:text="${board.disData}"></i></b></span></td>
+        </tr>
+        <!--    <tr>-->
+        <!--      <th>등록일</th><td><span th:text="${board.createdDate}"></span></td>-->
+        <!--    </tr>-->
+
+    </table>
+    <br>
+
+    <div class="container border p-3">
+        <div class="form-group">
+            <div class="title">파일명 : <span th:text="${board.audioFile}"></span></div>
+        </div>
+        <div class="form-group">
+            <div class="content" th:utext="${board.content}"></div>
+        </div>
+    </div>
+</div>
+<script src="/js/board.js"></script>
+<footer th:replace="/layout/footer.html :: fragment-footer"></footer>
+</body>
+</html>

@@ -17,6 +17,15 @@
                     <li class="nav-item">
                         <a class="nav-link" href="/voice/list">데이터 조회🌈</a>
                     </li>
+                    <!--<li class="nav-item">
+                        <a class="nav-link" href="/category/freeboard">자유게시판🌈</a>
+                    </li>-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="/category/knowledge">자유게시판🌈</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/board/writeForm">글쓰기📝</a>
+                    </li>
                     <li class="nav-item"><a class="nav-link" href="/user/listForm">사용자관리</a></li>
                     <!--<li class="nav-item">
                         <a class="nav-link" href="/user/updateForm">회원정보👥</a>
@@ -31,10 +40,18 @@
         <div sec:authorize="isAuthenticated()">
             <!--관리자 페이지-->
         <div sec:authorize="hasRole('USER')">
+
             <ul class="navbar-nav">
-                <!--<li class="nav-item">
-                    <a class="nav-link" href="/voice/list">데이터 조회🌈</a>
+              <!--  <li class="nav-item">
+                    <a class="nav-link" href="/category/freeboard">자유게시판🌈</a>
+                </li>-->
+                <li class="nav-item">
+                    <a class="nav-link" href="/category/knowledge">자유게시판🌈</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/board/writeForm">글쓰기📝</a>
+                </li>
+                <!--
                 <li class="nav-item">
                     <a class="nav-link" href="/user/updateForm">회원정보👥</a>
                 </li>-->
