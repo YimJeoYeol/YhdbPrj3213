@@ -5,10 +5,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.repository.query.Param;
-
-import java.util.List;
 
 public interface VoicedataRepository extends JpaRepository<Voicedata, Long> {
 
@@ -28,10 +25,18 @@ public interface VoicedataRepository extends JpaRepository<Voicedata, Long> {
     @Query(value = "SELECT v FROM Voicedata v JOIN FETCH v.user WHERE v.id = :id")
     Voicedata findByIdWithUser(@Param("id") long id);
 
-
     @Query(value = "SELECT v FROM Voicedata v JOIN FETCH v.user",
             countQuery = "SELECT COUNT(v) FROM Voicedata v JOIN v.user")
     Page<Voicedata> findAllWithUser(Pageable pageable);
+
+    //재학습된 데이터만 읽어오기
+    @Query(value = "SELECT v FROM Voicedata v JOIN FETCH v.user WHERE v.reroll IS NOT NULL",
+            countQuery = "SELECT COUNT(v) FROM Voicedata v JOIN v.user")
+    Page<Voicedata> findAllContainReroll(Pageable pageable);
+
+    //기간정한 데이터 목록
+    @Query(value = "SELECT v FROM Voicedata v WHERE v.created_date BETWEEN :start AND :end")
+    Page<Voicedata> findByDate(Pageable pageable, @Param("start") String start, @Param("end") String end);
 
 //    Page<Voicedata> findByTitleContaining(Pageable pageable);
 

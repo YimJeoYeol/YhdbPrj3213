@@ -33,7 +33,14 @@ public class VoicedataService {
 
     private final VoicedataRepository voicedataRepository;
 
-    //update
+//    //기간별 검색
+//    @Transactional
+//    public Page<Voicedata> searchByDate(Pageable pageable, Voicedata.AdminSearchForm form){
+//        log.info("s1"+form.getStart()+ form.getEnd());
+//        return voicedataRepository.findByDate(pageable,form.getStart().toString(),form.getEnd().toString());
+//    }
+
+    /*admindata 넣어주는*/
     @Transactional
     public void update(Long id, VoicedataDto dto){
         Voicedata voicedata = voicedataRepository.findById(id).orElseThrow(()->
@@ -42,38 +49,43 @@ public class VoicedataService {
         voicedata.update(dto.getAdmindata());
     }
 
-    //페이징 처리한 전체목록
+    /*페이징 처리한 전체목록*/
     @Transactional
     public Page<Voicedata> list(Pageable pageable){
         return voicedataRepository.findAllWithUser(pageable);
     }
 
-    //페이징 처리x 전체 목록
+    /*페이징 처리x 전체 목록*/
     @Transactional
     public List<VoicedataDto> findAll(){
         return voicedataRepository.findAll().stream().map(new VoicedataDto()::toDto).collect(Collectors.toList());
 
     }
 
-    //id 상세
+    /*id 상세*/
     @Transactional
     public VoicedataDto details(Long id){
         Voicedata voicedata = voicedataRepository.findByIdWithUser(id);
         return voicedata.toDto();
     }
 
-    //Dto상세
+    /*Dto상세*/
     @Transactional
     public VoicedataDto findById(Long id){
         Voicedata voicedata = voicedataRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("해당 게시물을 찾을 수 없습니다 id= " + id));
         return voicedata.toDto();
     }
 
+    /*재학습된 리스트만 보여주는 전체목록*/
+    @Transactional
+    public Page<Voicedata> findByReroll(Pageable pageable){
+        return voicedataRepository.findAllContainReroll(pageable);
+    }
+
     /*재학습 요청 service*/
     @Transactional
     public void reroll(VoicedataDto dto, Long idx, String declaration){
-        log.info("service 1");
-        log.info("service 1 " + idx);
+
         URI uri = UriComponentsBuilder
                     .fromUriString("http://127.0.0.1:5000")
                     .path("/api/text/{idx}/{declaration}")
@@ -81,17 +93,10 @@ public class VoicedataService {
                     .build()
                     .expand(idx,dto.getDeclaration())
                     .toUri();
-        log.info("service 2");
-        log.info("service 2 " + idx);
-//        log.info("",uri);
 
         MultiValueMap<String, String> MVMap = new LinkedMultiValueMap<>();
-        log.info("service 3");
-        log.info("service 3 " + idx);
         MVMap.add("text", dto.getContent());
-        log.info(dto.getContent());
-        log.info("service 4");
-        log.info("service 4 " + idx);
+
 //신호보내기
         WebClient.create().post()
                 .uri(uri)
@@ -100,9 +105,6 @@ public class VoicedataService {
                 .retrieve()
                 .toEntity(String.class)
                 .subscribe();
-        log.info("VoiClaReq post success");
-        log.info("service 5 " + idx);
-
     }
 
     /*모델 업데이트 요청 service*/

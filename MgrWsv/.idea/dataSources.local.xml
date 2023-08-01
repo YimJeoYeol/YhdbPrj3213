@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="dataSourceStorageLocal" created-in="IU-232.8660.185">
+  <component name="dataSourceStorageLocal" created-in="IU-231.9011.34">
     <data-source name="MariaDB" uuid="6c7bab5a-00e9-4ae6-9b57-104dcd2b42af">
       <database-info product="MariaDB" version="10.6.12-MariaDB-0ubuntu0.22.04.1" jdbc-version="4.2" driver-name="MariaDB Connector/J" driver-version="3.0.7" dbms="MARIADB" exact-version="10.6.12" exact-driver-version="3.0">
         <extra-name-characters>#@</extra-name-characters>
@@ -15,8 +15,22 @@
         </introspection-scope>
       </schema-mapping>
     </data-source>
-    <data-source name="@localhost" uuid="9b544d7c-f6cf-4f8d-a649-37de3c3847d4">
-      <database-info product="MariaDB" version="10.11.2-MariaDB" jdbc-version="4.2" driver-name="MariaDB Connector/J" driver-version="3.0.7" dbms="MARIADB" exact-version="10.11.2" exact-driver-version="3.0">
+    <data-source name="@182.229.34.184" uuid="9b544d7c-f6cf-4f8d-a649-37de3c3847d4">
+      <database-info product="MariaDB" version="10.6.12-MariaDB-0ubuntu0.22.04.1" jdbc-version="4.2" driver-name="MariaDB Connector/J" driver-version="3.0.7" dbms="MARIADB" exact-version="10.6.12" exact-driver-version="3.0">
+        <extra-name-characters>#@</extra-name-characters>
+        <identifier-quote-string>`</identifier-quote-string>
+      </database-info>
+      <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact" />
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <schema-mapping>
+        <introspection-scope>
+          <node kind="schema" negative="1" />
+        </introspection-scope>
+      </schema-mapping>
+    </data-source>
+    <data-source name="sample@localhost" uuid="c16d7856-c6b3-46be-8e80-77ce5790205d">
+      <database-info product="MariaDB" version="11.0.2-MariaDB" jdbc-version="4.2" driver-name="MariaDB Connector/J" driver-version="3.0.7" dbms="MARIADB" exact-version="11.0.2" exact-driver-version="3.0">
         <extra-name-characters>#@</extra-name-characters>
         <identifier-quote-string>`</identifier-quote-string>
       </database-info>
@@ -25,11 +39,7 @@
       <user-name>root</user-name>
       <schema-mapping>
         <introspection-scope>
-          <node kind="schema">
-            <name qname="@" />
-            <name qname="board_study" />
-            <name qname="samples" />
-          </node>
+          <node kind="schema" qname="@" />
         </introspection-scope>
       </schema-mapping>
     </data-source>

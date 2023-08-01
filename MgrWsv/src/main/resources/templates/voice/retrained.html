@@ -60,7 +60,7 @@
                 <td align="center" th:text="${voicedata.declaration}">신고된 번호</td>
                 <td align="center" th:text="${voicedata.disdata}">AI판별값</td>
                 <td align="center" th:text="${voicedata.persent}">AI확률</td>
-                <td align="center" th:text="${voicedata.admindata}">관리자판별값</td>
+                <td align="center" th:text="${voicedata?.admindata}">관리자판별값</td>
                 <td align="center" th:text="${voicedata.mfcc}">변조여부</td>
                 <td align="center" th:text="${voicedata.reroll}">재학습결과</td>
                 <td align="center" th:text="${voicedata.modified_date}">재학습날짜</td>

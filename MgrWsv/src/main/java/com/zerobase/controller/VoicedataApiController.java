@@ -54,25 +54,9 @@ public class VoicedataApiController {
     @GetMapping("/modelupdate/")
     public ResponseEntity<?> postUpdateModel_()
     {
-        log.info("api cntrl 1");
         voicedataService.updatemodel();
-        log.info("api cntrl 2");
         return ResponseEntity.ok(HttpStatus.OK);
     }
-
-
-//    @GetMapping("/api/voice/{id}")
-//    public ResponseEntity findById(@PathVariable Long id) {
-//        return ResponseEntity.ok(voicedataService.findById(id));
-//    }
-//    @GetMapping("/api/voicedatas")
-//    public ResponseEntity findAll() {
-//        return ResponseEntity.ok(voicedataService.findAll());
-//    }
-
-
-
-
 
 
 }

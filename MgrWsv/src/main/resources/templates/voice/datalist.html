@@ -16,60 +16,6 @@
     <h2>🚨신고된 피싱 내역🚨</h2>
   </div>
 
-<!--  <div align="right" th:object="${voicedataSearchDto}">-->
-<!--    <select th:field="*{searchBy}" class="form-control" style="width:auto;">-->
-<!--      <option selected value="userid">작성자</option>-->
-<!--      <option value="decNum">신고번호</option>-->
-<!--    </select>-->
-<!--    <input th:field="*{searchQuery}" type="text" class="form-control" placeholder="검색어를 입력해주세요">-->
-<!--    <button id="searchBtn" onclick="searchBtn()" type="submit" class="btn btn-primary">검색</button>-->
-<!--  </div>-->
-<!--  <sript src="/js/search.js"></sript>-->
-
-    <!--&lt;!&ndash;  기간별 검색&ndash;&gt;-->
-<!--  <input type="text" name="datetimes" />-->
-<!--  <script src="/js/searchList.js"></script>-->
-
-<!--  <form th:action="@{/voice/search}" th:object="${voicedatas}" method="POST" style="display: flex; justify-content: flex-end; padding: 10px 0;">-->
-<!--    <input type="date" th:field="*{start}" id="startDate">-->
-<!--    ~-->
-<!--    <input type="date" th:field="*{end}" id="endDate">-->
-<!--    <select th:field="*{searchType}">-->
-<!--      <option value="userid">작성자</option>-->
-<!--      <option value="declaration">신고번호</option>-->
-<!--    </select>-->
-<!--    <input th:field="*{keyword}" type="text" placeholder="검색어를 입력하세요."/>-->
-<!--    <input type="submit" value="검색"/>-->
-<!--  </form>-->
-
-<!--  <div align="right">-->
-<!--    <form action="/voice/search" method="get" role="search" autocomplete="off">-->
-<!--      <select name="type">-->
-<!--        <option selected value="userid">작성자ID</option>-->
-<!--        <option value="declaration">신고번호</option>-->
-<!--      </select>-->
-<!--      <input type="text" name="keyword" id="search" value="">-->
-<!--      <button class="btn btn-primary" type="submit">검색</button>-->
-<!--&lt;!&ndash;      <button onclick="search()" class="btn btn-primary" type="submit">검색</button>&ndash;&gt;-->
-<!--&lt;!&ndash;      <input type="button" class="btn btn-primary" type="submit" value="검색">&ndash;&gt;-->
-<!--&lt;!&ndash;      <script src="/js/search.js"></script>&ndash;&gt;-->
-<!--    </form>-->
-<!--  </div>-->
-
-<!--  <div align="right">-->
-<!--      <select id="type" name="type">-->
-<!--        <option selected value="userid">작성자ID</option>-->
-<!--        <option value="declaration">신고번호</option>-->
-<!--      </select>-->
-<!--      <input type="text" name="keyword" id="keyword" value="검색어">-->
-<!--      <input type="button" value="검색" onclick="searchBtn()" id="searchBtn">-->
-<!--    <script src="/js/search.js"></script>-->
-<!--      <button onclick="search()" class="btn btn-primary" type="submit">검색</button>-->
-<!--      <input type="button" class="btn btn-primary" type="submit" value="검색">-->
-<!--      <script src="/js/search.js"></script>-->
-<!--  </div>-->
-
-
   <br>
       <div align="left">
         <button class="btn btn-primary" onclick="location.href='/voice/retrain'">재학습결과 보기</button>
@@ -77,20 +23,6 @@
   <br>
   <div align="right">💡1:보이스피싱 의심 0:정상통화</div>
 
-  <!--  검색창-->
-  <!--  <div>-->
-  <!--    <form th:object="${SearchForm}" method="POST" style="display: flex; justify-content: flex-end; padding: 10px 0;">-->
-  <!--       <input type="date" th:field="*{start}">-->
-  <!--        ~ <input type="date" th:field="*{end}">-->
-  <!--      <select th:field="*{searchType}">-->
-  <!--        <option value="username">작성자</option>-->
-  <!--        <option value="declaration">신고된 번호</option>-->
-  <!--      </select>-->
-  <!--      <input th:field="*{searchType}" type="text" placeholder="검색어를 입력하세요"/>-->
-  <!--      <input type="submit" value="검색"/>-->
-  <!--    </form>-->
-
-  <!--  </div>-->
 
   <hr class="my-4">
   <div align="center" id="voicelist">
@@ -117,7 +49,8 @@
         <td align="center" th:text="${voicedata.declaration}">신고된 번호</td>
         <td align="center" th:text="${voicedata.disdata}">AI판별값</td>
         <td align="center" th:text="${voicedata.persent}" id="persent">확률</td>
-        <td align="center" th:text="${voicedata.admindata}">재판별값</td>
+        <td align="center" th:text="${voicedata?.admindata}">재판별값</td>
+<!--        <td align="center" th:if="${voicedata.admindata!=null}" th:text="${voicedata.admindata}">재판별값</td>-->
         <td align="center" th:text="${voicedata.mfcc}">변조여부</td>
         <td align="center" th:text="${voicedata.created_date}">등록일</td>
       </tr>
