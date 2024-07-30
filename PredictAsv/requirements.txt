@@ -121,7 +121,7 @@ google-auth-oauthlib==1.0.0
 google-pasta==0.2.0
 greenlet @ file:///C:/b/abs_47lk_w2ajq/croot/greenlet_1670513248400/work
 greenletio==0.10.1
-grpcio==1.54.2
+grpcio==1.54.3
 h11==0.14.0
 h5py @ file:///C:/ci/h5py_1659089830381/work
 HeapDict @ file:///Users/ktietz/demo/mc3/conda-bld/heapdict_1630598515714/work
